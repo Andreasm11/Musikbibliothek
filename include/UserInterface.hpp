@@ -1,14 +1,11 @@
-
+#pragma once
+#include "MusicLibrary.hpp"
 
 class UserInterface
 {
-    private:
-
     public:
-        void start();
-        void displayMenu();
-        void addSong();
-        void editSong();
-        void deleteSong();
-        void searchLibrary();
+        void start(MusicLibrary& library);
+        void displayMenu();  
+    private:
+        MusicLibrary musicLibrary;
 };

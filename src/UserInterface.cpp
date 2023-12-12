@@ -1,40 +1,42 @@
 #include "UserInterface.hpp"
-#include <string>
+#include "MusicLibrary.hpp"
 #include <iostream>
 
-void UserInterface::start()
+void UserInterface::start(MusicLibrary& library)
 {
     int choice = 0;
     while (choice != 6)
     {
         displayMenu();
+        std::cout << "Bitte wählen Sie eine Option (1-6):";
         std::cin >> choice;
-        std::cout << ("\n\n");
+       
         switch (choice)
         {
             case 1:
-                //displayLibrary();
+                library.displayLibrary();
                 break;
             
             case 2:
-                //addSong();
+                library.addSong();
                 break;
             
             case 3:
-                //editSong();
+                library.editSong();
                 break;
             
             case 4:
-                //deleteSong();
+                library.deleteSong();
                 break;
             
             case 5:
-                //searchLibrary();
+                library.searchLibrary();
                 break;
 
             case 6:
+                library.saveLibrary();
                 std::cout << "Programm wird beendet.\n";
-                break;
+                return;
             
             default:
                 std::cout << "Ungültige Option, bitte nochmal versuchen. \n" << std::endl;
@@ -52,5 +54,4 @@ void UserInterface::displayMenu()
     std::cout << "5. Nach Titeln oder Meta-Daten suchen\n";
     std::cout << "6. Speichern und Programm beenden\n";
     std::cout << "=======================================\n";
-    std::cout << "Bitte wählen Sie eine Option: ";
 }
