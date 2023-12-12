@@ -1,7 +1,9 @@
 #pragma once
 
+
 #include <string>
 #include <vector>
+#include <nlohmann/json.hpp>
 
 struct Song
 {
@@ -17,12 +19,20 @@ class MusicLibrary
 {
     public:
         void loadLibrary();
-        void saveLibrary();
-        void displayLibrary();
         void addSong();
         void editSong();
         void deleteSong();
         void searchLibrary();
+        void saveLibrary();
+        void displayLibrary();
+
     
     private:
+        std::vector<Song> library;
+        std::string filename;
+
+        void initializeLibrary();
+        
+
 };
+

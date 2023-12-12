@@ -15,23 +15,23 @@ void UserInterface::start()
         switch (choice)
         {
             case 1:
-                //displayLibrary();
+                musicLibrary.displayLibrary();
                 break;
             
             case 2:
-                //addSong();
+                musicLibrary.addSong();
                 break;
             
             case 3:
-                //editSong();
+                musicLibrary.editSong();
                 break;
             
             case 4:
-                //deleteSong();
+                musicLibrary.deleteSong();
                 break;
             
             case 5:
-                //searchLibrary();
+                musicLibrary.searchLibrary();
                 break;
 
             case 6:

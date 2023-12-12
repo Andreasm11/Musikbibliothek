@@ -1,4 +1,5 @@
-
+#pragma once
+#include "MusicLibrary.hpp"
 
 class UserInterface
 {
@@ -6,4 +7,5 @@ class UserInterface
         void start();
         void displayMenu();  
     private:
+        MusicLibrary musicLibrary;
 };
