@@ -57,6 +57,21 @@ void MusicLibrary::searchLibrary()
     std::cout << "Bibliothek durchsuchen ";
 }
 
+void MusicLibrary::displayLibrary()
+{
+    std::cout << "Bibliothek\n";
+    for (const auto& song : songs)
+    {
+        std::cout << "Titel: " << song.title << "\n";
+        std::cout << "Künstler: " << song.artist << "\n";
+        std::cout << "Album: " << song.album << "\n";
+        std::cout << "Erscheinungsjahr: " << song.year << "\n";
+        std::cout << "Feature: " << song.feature << "\n";
+        std::cout << "Genre: " << song.genre << "\n";
+
+        std::cout << "-----------------------------------\n"; 
+    }
+}
 
 
 void MusicLibrary::saveLibrary()
