@@ -19,13 +19,11 @@ class MusicLibrary
             };
 
         void initializeLibrary();
-        //void loadLibrary();
         void addSong();
         void editSong();
         void deleteSong();
         void searchLibrary();
         void saveLibrary();
-        //void displaySong(const Song& song) const;
         void displayLibrary();
     
     private:

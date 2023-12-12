@@ -59,7 +59,7 @@ void MusicLibrary::searchLibrary()
 
 void MusicLibrary::displayLibrary()
 {
-    std::cout << "Bibliothek\n";
+    std::cout << "---------------Bibliothek----------------\n\n\n";
     for (const auto& song : songs)
     {
         std::cout << "Titel: " << song.title << "\n";
@@ -69,13 +69,29 @@ void MusicLibrary::displayLibrary()
         std::cout << "Feature: " << song.feature << "\n";
         std::cout << "Genre: " << song.genre << "\n";
 
-        std::cout << "-----------------------------------\n"; 
+        std::cout << "-------------------------------------------\n"; 
     }
 }
 
 
 void MusicLibrary::saveLibrary()
 {
-    std::cout << "Bibliothek speichern";
+    json libraryJson;
+    for (const auto& song : songs)
+    {
+        json songJson;
+        songJson["title"] = song.title;
+        songJson["artist"] = song.artist;
+        songJson["album"] = song.album;
+        songJson["year"] = song.year;
+        songJson["feature"] = song.feature;
+        songJson["genre"] = song.genre;
+
+        libraryJson.push_back(songJson);
+    }
+
+    std::ofstream file("library.json");
+    file << libraryJson.dump(2);
+    std::cout << "Bibliothek wurde erfolgreich gespeichert. \n";
 }
 
