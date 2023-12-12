@@ -41,23 +41,33 @@ void MusicLibrary::initializeLibrary()
 void MusicLibrary::addSong()
 {
     Song newSong;
+
     std::cout << "Titel: ";
-    std::cin >> newSong.title;
+    std::getline (std::cin, newSong.title);
+    std::cin.ignore();
+
     std::cout << "Künstler: ";
-    std::cin >> newSong.artist;
+    std::getline (std::cin, newSong.artist);
+    std::cin.ignore();
+
     std::cout << "Album: ";
-    std::cin >> newSong.album;
+    std::getline (std::cin, newSong.album);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     std::cout << "Erscheinungsjahr: ";
     std::cin >> newSong.year;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
     std::cout << "Featuring: ";
-    std::cin >> newSong.feature;
+    std::cin.ignore();
+    std::getline (std::cin, newSong.feature);
+    
     std::cout << "Genre: ";
-    std::cin >> newSong.genre;
+    std::getline (std::cin, newSong.genre);
 
     songs.push_back(newSong);
     std::cout << "Song erfolgreich hinzugefügt. \n";
-
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');             //ChatGpt zu Rat gezogen, da Menü dauerhaft durchgelaufen
+    //ChatGpt zu Rat gezogen, da Menü dauerhaft durchgelaufen
 }
 
 void MusicLibrary::editSong()
@@ -72,7 +82,14 @@ void MusicLibrary::deleteSong()
 
 void MusicLibrary::searchLibrary()
 {
-    std::cout << "Bibliothek durchsuchen ";
+    std::string searchWord;
+    std::cout << "Geben Sie Ihren Suchbegriff ein: ";
+    std::getline(std::cin, searchWord);
+
+    //Suche
+
+
+    //Anzeigen der Suchbegriffe 
 }
 
 void MusicLibrary::displayLibrary()
@@ -91,7 +108,12 @@ void MusicLibrary::displayLibrary()
             std::cout << "Künstler: " << song.artist << "\n";
             std::cout << "Album: " << song.album << "\n";
             std::cout << "Erscheinungsjahr: " << song.year << "\n";
-            std::cout << "Feature: " << song.feature << "\n";
+
+            if (!song.feature.empty())
+            {
+                std::cout << "Feature: " << song.feature << "\n";
+            }
+
             std::cout << "Genre: " << song.genre << "\n";
 
             std::cout << "-------------------------------------------\n"; 
