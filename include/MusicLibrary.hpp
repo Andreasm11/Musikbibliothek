@@ -24,7 +24,10 @@ class MusicLibrary
         void deleteSong();
         void searchLibrary();
         void saveLibrary();
+<<<<<<< HEAD
         void displayLibrary();
+=======
+>>>>>>> 7a2b43cf09ba38de461f2793002de898ab018796
 
     
     private:
@@ -32,7 +35,11 @@ class MusicLibrary
         std::string filename;
 
         void initializeLibrary();
+<<<<<<< HEAD
         
+=======
+        void displayLibrary();
+>>>>>>> 7a2b43cf09ba38de461f2793002de898ab018796
 
 };
 
