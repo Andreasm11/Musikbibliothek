@@ -34,12 +34,30 @@ void MusicLibrary::initializeLibrary()
     else                                            
     {
         std::cout << "Datei 'library.json' nicht gefunden. Neue Bibliothek wird erstellt. \n";
+        saveLibrary();
     }
 }
 
 void MusicLibrary::addSong()
 {
-    std::cout << "Songs hinzufügen ";
+    Song newSong;
+    std::cout << "Titel: ";
+    std::cin >> newSong.title;
+    std::cout << "Künstler: ";
+    std::cin >> newSong.artist;
+    std::cout << "Album: ";
+    std::cin >> newSong.album;
+    std::cout << "Erscheinungsjahr: ";
+    std::cin >> newSong.year;
+    std::cout << "Featuring: ";
+    std::cin >> newSong.feature;
+    std::cout << "Genre: ";
+    std::cin >> newSong.genre;
+
+    songs.push_back(newSong);
+    std::cout << "Song erfolgreich hinzugefügt. \n";
+
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');             //ChatGpt zu Rat gezogen, da Menü dauerhaft durchgelaufen
 }
 
 void MusicLibrary::editSong()
