@@ -4,7 +4,7 @@
 class UserInterface
 {
     public:
-        void start();
+        void start(MusicLibrary& library);
         void displayMenu();  
     private:
         MusicLibrary musicLibrary;
