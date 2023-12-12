@@ -43,23 +43,20 @@ void MusicLibrary::addSong()
     Song newSong;
 
     std::cout << "Titel: ";
-    std::getline (std::cin, newSong.title);
-    std::cin.ignore();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline (std::cin, newSong.title); 
 
     std::cout << "Künstler: ";
     std::getline (std::cin, newSong.artist);
-    std::cin.ignore();
 
     std::cout << "Album: ";
     std::getline (std::cin, newSong.album);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Erscheinungsjahr: ";
     std::cin >> newSong.year;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Featuring: ";
-    std::cin.ignore();
     std::getline (std::cin, newSong.feature);
     
     std::cout << "Genre: ";
@@ -67,7 +64,6 @@ void MusicLibrary::addSong()
 
     songs.push_back(newSong);
     std::cout << "Song erfolgreich hinzugefügt. \n";
-    //ChatGpt zu Rat gezogen, da Menü dauerhaft durchgelaufen
 }
 
 void MusicLibrary::editSong()
