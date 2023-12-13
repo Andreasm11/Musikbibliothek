@@ -138,15 +138,41 @@ void MusicLibrary::searchLibrary()
 {
     std::string searchWord;
     std::cout << "Geben Sie Ihren Suchbegriff ein: ";
+    std::cin.ignore();
     std::getline(std::cin, searchWord);
 
     std::vector<Song> searchResults;
-    std::
+    std::copy_if(songs.begin(), songs.end(), std::back_inserter(searchResults), [&searchWord](const Song& song)
+    {
+        std::string yearAsString = std::to_string(song.year);
 
-    //Suche
+        return song.title.find(searchWord) != std::string::npos ||
+               song.artist.find(searchWord) != std::string::npos ||
+               song.album.find(searchWord) != std::string::npos ||
+               song.feature.find(searchWord) != std::string::npos ||
+               song.genre.find(searchWord) != std::string::npos ||
+               yearAsString.find(searchWord) != std::string::npos;     
+    });
 
-
-    //Anzeigen der Suchbegriffe 
+    if (searchResults.empty())
+    {
+        std::cout << "Keine Ergebnisse für Ihre Suche gefunden. \n";
+    }
+    else
+    {
+        std::cout << "Suchergebnisse:\n";
+        std::cout << "-----------------------\n\n";
+        for (size_t i = 0; i < searchResults.size(); ++i)
+        {
+            std::cout << i+1 << ". Ergebnis:\n" << "Titel: " << searchResults[i].title << "\n" << "Künstler: " << searchResults[i].artist << 
+            "\n" << "Album: " << searchResults[i].album << "\n" << "Erscheinungsjahr: " << searchResults[i].year << "\n";
+            if (!searchResults[i].feature.empty())
+            {
+                std::cout << "Feature: " << searchResults[i].feature << "\n";
+            }
+            std::cout << "Genre: " << searchResults[i].genre << "\n\n";
+        }
+    }
 }
 
 void MusicLibrary::displayLibrary()
