@@ -68,7 +68,65 @@ void MusicLibrary::addSong()
 
 void MusicLibrary::editSong()
 {
-    std::cout << "Songs bearbeiten ";
+    if(songs.empty())
+    {
+        std::cout << "Die Bibliothek ist leer. Es können keine Songs bearbeitet werden.\n";
+        return;
+    }
+
+    std::string titleToEdit;
+    std::cout << "Geben Sie den Titel des zu bearbeitenden Songs ein:";
+    std::cin.ignore();
+    std::getline(std::cin, titleToEdit);
+
+    auto it = std::find_if(songs.begin(), songs.end(), [&titleToEdit] (const Song& song)
+    {
+        return song.title == titleToEdit;
+    });
+
+    if (it == songs.end())
+    {
+        std::cout << "Der Titel" << titleToEdit << "wurde nicht gefunden. Bearbeitung abgebrochen.";
+        return;
+    }
+
+    std::cout << "Wählen Sie, welches Metadata Sie bearbeiten möchten:\n";
+    std::cout << "1. Künstler\n";
+    std::cout << "2. ALbum\n";
+    std::cout << "3. Erscheinungsdatum\n";
+    std::cout << "4. Featuring\n";
+    std::cout << "5. Genre\n";
+    std::cout << "Ihre Wahl: ";
+
+    int userChoice;
+    std::cin >> userChoice;
+
+    switch (userChoice)
+    {
+        case 1:
+            std::cout << "Neuer Künstler: ";
+            std::getline(std::cin, it->artist);
+            break;
+        case 2:
+            std::cout << "Neues Album: ";
+            std::getline(std::cin, it->album);
+            break;
+        case 3:
+            std::cout << "Neues Erscheinungsjahr: ";
+            std::cin >> it->year;
+            break;
+        case 4:
+            std::cout << "Neues Featuring: ";
+            std::getline(std::cin, it->feature);
+            break;
+        case 5:
+            std::cout << "Neues Genre: ";
+            std::getline(std::cin, it->genre);
+            break;
+        default:
+            std::cout << "Ungültige Auswahl.";
+            return;
+    }
 }
 
 void MusicLibrary::deleteSong()
@@ -81,6 +139,9 @@ void MusicLibrary::searchLibrary()
     std::string searchWord;
     std::cout << "Geben Sie Ihren Suchbegriff ein: ";
     std::getline(std::cin, searchWord);
+
+    std::vector<Song> searchResults;
+    std::
 
     //Suche
 
