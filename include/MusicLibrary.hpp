@@ -27,6 +27,7 @@ class MusicLibrary
         void displayLibrary();
     
     private:
-        std::vector<Song> songs; 
+        std::vector<Song> songs;
+        std::string searchWord;
 };
 

@@ -74,6 +74,9 @@ void MusicLibrary::editSong()
         return;
     }
 
+    std::cout << "Bibliothek anzeigen vor dem Bearbeiten:\n";
+    displayLibrary();
+
     std::string titleToEdit;
     std::cout << "Geben Sie den Titel des zu bearbeitenden Songs ein:";
     std::cin.ignore();
@@ -92,7 +95,7 @@ void MusicLibrary::editSong()
 
     std::cout << "Wählen Sie, welches Metadata Sie bearbeiten möchten:\n";
     std::cout << "1. Künstler\n";
-    std::cout << "2. ALbum\n";
+    std::cout << "2. Album\n";
     std::cout << "3. Erscheinungsdatum\n";
     std::cout << "4. Featuring\n";
     std::cout << "5. Genre\n";
@@ -100,27 +103,32 @@ void MusicLibrary::editSong()
 
     int userChoice;
     std::cin >> userChoice;
-
+                                                                    //while einbauen damit mehrere Metadaten geändert werden können und Feedbacknachricht einbauen
     switch (userChoice)
     {
         case 1:
             std::cout << "Neuer Künstler: ";
+            std::cin.ignore();
             std::getline(std::cin, it->artist);
             break;
         case 2:
             std::cout << "Neues Album: ";
+            std::cin.ignore();
             std::getline(std::cin, it->album);
             break;
         case 3:
             std::cout << "Neues Erscheinungsjahr: ";
+            std::cin.ignore();
             std::cin >> it->year;
             break;
         case 4:
             std::cout << "Neues Featuring: ";
+            std::cin.ignore();
             std::getline(std::cin, it->feature);
             break;
         case 5:
             std::cout << "Neues Genre: ";
+            std::cin.ignore();
             std::getline(std::cin, it->genre);
             break;
         default:
@@ -131,12 +139,48 @@ void MusicLibrary::editSong()
 
 void MusicLibrary::deleteSong()
 {
-    std::cout << "Songs löschen ";
+    if(songs.empty())
+    {
+        std::cout << "Die Bibliothek ist leer. Es können keine Songs gelöscht werden.\n";
+        return;
+    }
+
+    std::cout << "Bibliothek anzeigen vor dem Löschen";
+    displayLibrary();
+
+    std::cout << "Suchen Sie nach dem Song den Sie löschen wollen";
+    searchLibrary();
+
+    size_t indexToDelete;
+    std::cout << "Geben Sie die Nummer des zu löschenden Songs ein (1-)"<<songs.size()<<")";
+    std::cin >> indexToDelete;
+
+    if(indexToDelete < 1 || indexToDelete > searchResults.size())
+    {
+        std::cout << "Ungültige Nummer. Löschen abgebrochen.\n";
+        return;
+    }
+
+    auto it = std::remove_if(songs.begin(), songs.end(), [&searchWord](const Song& song)
+    {
+        std::string yearAsString = std::to_string(song.year);
+
+        return song.title.find(searchWord) != std::string::npos ||
+               song.artist.find(searchWord) != std::string::npos ||
+               song.album.find(searchWord) != std::string::npos ||
+               song.feature.find(searchWord) != std::string::npos ||
+               song.genre.find(searchWord) != std::string::npos ||
+               yearAsString.find(searchWord) != std::string::npos;
+    });
+
+    songs.erase(it, songs.end());
+
+    std::cout << "Song" << searchWord << "wurde gelöscht.\n";
 }
 
 void MusicLibrary::searchLibrary()
 {
-    std::string searchWord;
+    
     std::cout << "Geben Sie Ihren Suchbegriff ein: ";
     std::cin.ignore();
     std::getline(std::cin, searchWord);
