@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <nlohmann/json.hpp>
+#include <algorithm>
 
 using json = nlohmann::json;
 
@@ -145,42 +146,29 @@ void MusicLibrary::deleteSong()
         return;
     }
 
-    std::cout << "Bibliothek anzeigen vor dem Löschen";
-    displayLibrary();
+    std::string titleToDelete;
+    std::cout << "Geben Sie den Titel ein, der gelöscht werden soll: ";
+    std::cin.ignore();
+    std::getline(std::cin, titleToDelete);
 
-    std::cout << "Suchen Sie nach dem Song den Sie löschen wollen";
-    searchLibrary();
-
-    size_t indexToDelete;
-    std::cout << "Geben Sie die Nummer des zu löschenden Songs ein (1-)"<<songs.size()<<")";
-    std::cin >> indexToDelete;
-
-    if(indexToDelete < 1 || indexToDelete > searchResults.size())
+    std::vector<Song> updatedLibrary;
+    std::remove_copy_if(songs.begin(), songs.end(), std::back_inserter(updatedLibrary), [&titleToDelete](const Song& song)
     {
-        std::cout << "Ungültige Nummer. Löschen abgebrochen.\n";
-        return;
-    }
-
-    auto it = std::remove_if(songs.begin(), songs.end(), [&searchWord](const Song& song)
-    {
-        std::string yearAsString = std::to_string(song.year);
-
-        return song.title.find(searchWord) != std::string::npos ||
-               song.artist.find(searchWord) != std::string::npos ||
-               song.album.find(searchWord) != std::string::npos ||
-               song.feature.find(searchWord) != std::string::npos ||
-               song.genre.find(searchWord) != std::string::npos ||
-               yearAsString.find(searchWord) != std::string::npos;
+        return song.title == titleToDelete;
     });
 
-    songs.erase(it, songs.end());
+    if (updatedLibrary.size() == songs.size()) {
+        std::cout << "Kein Song mit dem Titel '" << titleToDelete << "' gefunden.\n";
+    } else {
+        songs = std::move(updatedLibrary);
+        std::cout << "Songs mit dem Titel '" << titleToDelete << "' wurden gelöscht.\n";
+    }
 
-    std::cout << "Song" << searchWord << "wurde gelöscht.\n";
 }
 
 void MusicLibrary::searchLibrary()
 {
-    
+    std::string searchWord;
     std::cout << "Geben Sie Ihren Suchbegriff ein: ";
     std::cin.ignore();
     std::getline(std::cin, searchWord);
