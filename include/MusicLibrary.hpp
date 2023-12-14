@@ -18,6 +18,8 @@ class MusicLibrary
                 std::string genre;
             };
 
+        std::vector<Song> songs;
+
         void initializeLibrary();
         void addSong();
         void editSong();
@@ -27,6 +29,6 @@ class MusicLibrary
         void displayLibrary();
     
     private:
-        std::vector<Song> songs; 
+         
 };
 
