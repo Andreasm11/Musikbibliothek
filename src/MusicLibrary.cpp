@@ -44,7 +44,6 @@ void MusicLibrary::addSong()
     Song newSong;
 
     std::cout << "Titel: ";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline (std::cin, newSong.title); 
 
     std::cout << "Künstler: ";
@@ -140,7 +139,7 @@ void MusicLibrary::editSong()
 
 void MusicLibrary::deleteSong()
 {
-    if(songs.empty())
+    if (songs.empty())
     {
         std::cout << "Die Bibliothek ist leer. Es können keine Songs gelöscht werden.\n";
         return;
@@ -151,19 +150,17 @@ void MusicLibrary::deleteSong()
     std::cin.ignore();
     std::getline(std::cin, titleToDelete);
 
-    std::vector<Song> updatedLibrary;
-    std::remove_copy_if(songs.begin(), songs.end(), std::back_inserter(updatedLibrary), [&titleToDelete](const Song& song)
+    auto it = std::remove_if(songs.begin(), songs.end(), [&titleToDelete](const Song& song)
     {
         return song.title == titleToDelete;
     });
 
-    if (updatedLibrary.size() == songs.size()) {
+    if (it == songs.end()) {
         std::cout << "Kein Song mit dem Titel '" << titleToDelete << "' gefunden.\n";
     } else {
-        songs = std::move(updatedLibrary);
+        songs.erase(it, songs.end());
         std::cout << "Songs mit dem Titel '" << titleToDelete << "' wurden gelöscht.\n";
     }
-
 }
 
 void MusicLibrary::searchLibrary()
