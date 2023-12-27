@@ -30,11 +30,11 @@ void MusicLibrary::initializeLibrary()
                                                                         //erweitern
             songs.push_back(song);
         }
-        std::cout << "Bibliothek wurde aus 'library.json' initalisiert.\n";
+        std::cout << "Bibliothek wurde erfolgreich aus 'library.json' initalisiert.\n";
     }
     else                                            
     {
-        std::cout << "Datei 'library.json' nicht gefunden. Neue Bibliothek wird erstellt. \n";
+        std::cout << "Datei 'library.json' wurde nicht gefunden. Neue Bibliothek wird erstellt. \n";
         saveLibrary();
     }
 }
@@ -42,6 +42,8 @@ void MusicLibrary::initializeLibrary()
 void MusicLibrary::addSong()
 {
     Song newSong;
+
+    std::cout << "Bitte geben Sie die angeforderten Metadaten an!\n";
 
     std::cout << "Titel: ";
     std::getline (std::cin, newSong.title); 
@@ -70,7 +72,7 @@ void MusicLibrary::editSong()
 {
     if(songs.empty())
     {
-        std::cout << "Die Bibliothek ist leer. Es können keine Songs bearbeitet werden.\n";
+        std::cout << "Die Bibliothek ist leer. Es sind keine Songs zum Bearbeiten existent.\n";
         return;
     }
 
@@ -93,48 +95,72 @@ void MusicLibrary::editSong()
         return;
     }
 
-    std::cout << "Wählen Sie, welches Metadata Sie bearbeiten möchten:\n";
-    std::cout << "1. Künstler\n";
-    std::cout << "2. Album\n";
-    std::cout << "3. Erscheinungsdatum\n";
-    std::cout << "4. Featuring\n";
-    std::cout << "5. Genre\n";
-    std::cout << "Ihre Wahl: ";
+    char continueEditing;
 
-    int userChoice;
-    std::cin >> userChoice;
-                                                                    //while einbauen damit mehrere Metadaten geändert werden können und Feedbacknachricht einbauen
-    switch (userChoice)
+    do
     {
-        case 1:
-            std::cout << "Neuer Künstler: ";
-            std::cin.ignore();
-            std::getline(std::cin, it->artist);
-            break;
-        case 2:
-            std::cout << "Neues Album: ";
-            std::cin.ignore();
-            std::getline(std::cin, it->album);
-            break;
-        case 3:
-            std::cout << "Neues Erscheinungsjahr: ";
-            std::cin.ignore();
-            std::cin >> it->year;
-            break;
-        case 4:
-            std::cout << "Neues Featuring: ";
-            std::cin.ignore();
-            std::getline(std::cin, it->feature);
-            break;
-        case 5:
-            std::cout << "Neues Genre: ";
-            std::cin.ignore();
-            std::getline(std::cin, it->genre);
-            break;
-        default:
-            std::cout << "Ungültige Auswahl.";
-            return;
-    }
+        std::cout << "Wählen Sie, welche Metadata Sie bearbeiten möchten:\n";
+        std::cout << "1. Titel\n";
+        std::cout << "2. Künstler\n";
+        std::cout << "3. Album\n";
+        std::cout << "4. Erscheinungsdatum\n";
+        std::cout << "5. Featuring\n";
+        std::cout << "6. Genre\n";
+        std::cout << "Ihre Wahl: ";
+
+        int userChoice;
+        std::cin >> userChoice;
+                                                                        //while einbauen damit mehrere Metadaten geändert werden können und Feedbacknachricht einbauen
+        switch (userChoice)
+        {
+            case 1:
+                std::cout << "Neuer Titel: ";
+                std::getline(std::cin, it->title);
+                break;
+
+            case 2:
+                std::cout << "Neuer Künstler: ";
+                std::cin.ignore();
+                std::getline(std::cin, it->artist);
+                break;
+
+            case 3:
+                std::cout << "Neues Album: ";
+                std::cin.ignore();
+                std::getline(std::cin, it->album);
+                break;
+
+            case 4:
+                std::cout << "Neues Erscheinungsjahr: ";
+                std::cin.ignore();
+                std::cin >> it->year;
+                break;
+
+            case 5:
+                std::cout << "Neues Featuring: ";
+                std::cin.ignore();
+                std::getline(std::cin, it->feature);
+                break;
+
+            case 6:
+                std::cout << "Neues Genre: ";
+                std::cin.ignore();
+                std::getline(std::cin, it->genre);
+                break;
+                
+            default:
+                std::cout << "Ungültige Auswahl.";
+                return;
+        }
+
+        std::cout << "Möchten Sie eine weitere Metadata bearbeiten? (j/n): ";
+        std::cin >> continueEditing;
+
+    } while (continueEditing == 'j' || continueEditing == 'J');
+    
+    std::cout << "Bearbeitung abgeschlossen.\n";
+
+    
 }
 
 void MusicLibrary::deleteSong()
@@ -251,7 +277,7 @@ void MusicLibrary::saveLibrary()
     }
 
     std::ofstream file("library.json");
-    file << libraryJson.dump(2);
-    std::cout << "Bibliothek wurde erfolgreich gespeichert. \n";
+    file << libraryJson.dump(2);                       
+    std::cout << "Die Bibliothek wurde erfolgreich gespeichert. \n";
 }
 
