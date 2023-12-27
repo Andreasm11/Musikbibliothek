@@ -7,5 +7,5 @@ class UserInterface
         void start(MusicLibrary& library);
         void displayMenu();  
     private:
-        MusicLibrary musicLibrary;
+        MusicLibrary library;
 };
