@@ -49,7 +49,7 @@ TEST_CASE("EditSong Funktion", "[editSong]")
 
     SECTION("Song bearbeiten")
     {
-        std::istringstream input(" Song1\n1\nNewArtist\n");
+        std::istringstream input(" Song1\n2\nNewArtist\n");
         CinRedirect redirect(input);
 
         library.editSong();

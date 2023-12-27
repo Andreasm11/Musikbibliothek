@@ -112,7 +112,7 @@ void MusicLibrary::editSong()
         std::cin >> userChoice;
 
         std::cin.ignore();
-                                                                        //while einbauen damit mehrere Metadaten geändert werden können und Feedbacknachricht einbauen
+        
         switch (userChoice)
         {
             case 1:
@@ -175,8 +175,7 @@ void MusicLibrary::deleteSong()
 
     std::string titleToDelete;
     std::cout << "Geben Sie den Titel ein, der gelöscht werden soll: ";
-    std::cin.ignore();
-    std::getline(std::cin, titleToDelete);
+    std::getline(std::cin >> std::ws, titleToDelete);
 
     auto it = std::remove_if(songs.begin(), songs.end(), [&titleToDelete](const Song& song)
     {
