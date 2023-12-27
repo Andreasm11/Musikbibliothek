@@ -46,23 +46,23 @@ void MusicLibrary::addSong()
     std::cout << "Bitte geben Sie die angeforderten Metadaten an!\n";
 
     std::cout << "Titel: ";
-    std::getline (std::cin, newSong.title); 
+    std::getline (std::cin >> std::ws, newSong.title);
 
     std::cout << "Künstler: ";
-    std::getline (std::cin, newSong.artist);
+    std::getline (std::cin >> std::ws, newSong.artist);
 
     std::cout << "Album: ";
-    std::getline (std::cin, newSong.album);
+    std::getline (std::cin >> std::ws, newSong.album);
 
     std::cout << "Erscheinungsjahr: ";
-    std::cin >> newSong.year;
+    std::cin >> std::ws>> newSong.year;
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     std::cout << "Featuring: ";
-    std::getline (std::cin, newSong.feature);
+    std::getline (std::cin >> std::ws, newSong.feature);
     
     std::cout << "Genre: ";
-    std::getline (std::cin, newSong.genre);
+    std::getline (std::cin >> std::ws, newSong.genre);
 
     songs.push_back(newSong);
     std::cout << "Song erfolgreich hinzugefügt. \n";
@@ -99,7 +99,7 @@ void MusicLibrary::editSong()
 
     do
     {
-        std::cout << "Wählen Sie, welche Metadata Sie bearbeiten möchten:\n";
+        std::cout << "Wählen Sie, welche Metadata Sie bearbeiten möchten: \n";
         std::cout << "1. Titel\n";
         std::cout << "2. Künstler\n";
         std::cout << "3. Album\n";
@@ -110,46 +110,48 @@ void MusicLibrary::editSong()
 
         int userChoice;
         std::cin >> userChoice;
+
+        std::cin.ignore();
                                                                         //while einbauen damit mehrere Metadaten geändert werden können und Feedbacknachricht einbauen
         switch (userChoice)
         {
             case 1:
                 std::cout << "Neuer Titel: ";
-                std::getline(std::cin, it->title);
+                std::getline(std::cin >> std::ws, it->title);
                 break;
 
             case 2:
                 std::cout << "Neuer Künstler: ";
-                std::cin.ignore();
-                std::getline(std::cin, it->artist);
+                
+                std::getline(std::cin >> std::ws, it->artist);
                 break;
 
             case 3:
                 std::cout << "Neues Album: ";
-                std::cin.ignore();
-                std::getline(std::cin, it->album);
+                
+                std::getline(std::cin >> std::ws, it->album);
                 break;
 
             case 4:
                 std::cout << "Neues Erscheinungsjahr: ";
-                std::cin.ignore();
-                std::cin >> it->year;
+                
+                std::cin >> std::ws >> it->year;
                 break;
 
             case 5:
                 std::cout << "Neues Featuring: ";
-                std::cin.ignore();
-                std::getline(std::cin, it->feature);
+               
+                std::getline(std::cin >> std::ws, it->feature);
                 break;
 
             case 6:
                 std::cout << "Neues Genre: ";
-                std::cin.ignore();
-                std::getline(std::cin, it->genre);
+
+                std::getline(std::cin >> std::ws, it->genre);
                 break;
-                
+
             default:
-                std::cout << "Ungültige Auswahl.";
+                std::cout << "Ungültige Auswahl.\n";
                 return;
         }
 
