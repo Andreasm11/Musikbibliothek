@@ -13,7 +13,7 @@ Die Musikbibliothek ist ein C++-Projekt, das es dem Benutzer ermöglicht, seine 
 ## Benutzerführung
 
 - Wenn Bibliothek übergeben werden soll muss diese benannt sein "library.json" und folgenden Aufbau haben:
-  '''text
+```text
 [
   {
     "title": "Songname",
@@ -27,6 +27,7 @@ Die Musikbibliothek ist ein C++-Projekt, das es dem Benutzer ermöglicht, seine 
     //weitere Einträge hier einfügen
   }
 ]
+```
 
 ## Projektstruktur
 
