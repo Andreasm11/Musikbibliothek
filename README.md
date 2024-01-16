@@ -14,18 +14,19 @@ Die Musikbibliothek ist ein C++-Projekt, das es dem Benutzer ermöglicht, seine 
 
 - Wenn Bibliothek übergeben werden soll muss diese benannt sein "library.json" und folgenden Aufbau haben:
   '''text
-  [
-   {
-     "title": "Songname",
-     "album": "Albumname",
-     "artist": "Künstlername",
-     "feature": "Kollaborationspartner",
-     "genre": "Genre des Songs",
-     "year": "Erscjeiningsjahr
-    },
-   {
-   }
- ]
+[
+  {
+    "title": "Songname",
+    "album": "Albumname",
+    "artist": "Künstlername",
+    "feature": "Kollaborationspartner",
+    "genre": "Genre des Songs",
+    "year": "Erscheiningsjahr
+  },
+  {
+    //weitere Einträge hier einfügen
+  }
+]
 
 ## Projektstruktur
 
