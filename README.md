@@ -82,14 +82,14 @@ g++ -std=c++17 -Wall -o bin/test_app obj/Logbook.o obj/Trip.o obj/UserInterface.
 ## Projektstruktur
 
 ```text
-Fahrtenbuch/
+Musikbibliothek/
 |-- bin/
 |   |-- my_app (oder my_app.exe für Windows)
 |   `-- test_app (oder test_app.exe für Windows)
 |
 |-- include/
     |-- json.hpp
-|   |-- MusicLoibrary.hpp
+|   |-- MusicLibrary.hpp
 |   `-- UserInterface.hpp
 |
 |-- obj/
