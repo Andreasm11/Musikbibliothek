@@ -27,7 +27,7 @@ void MusicLibrary::initializeLibrary()
                 song.feature = songJson["feature"];
             }
             song.genre = songJson["genre"];
-                                                                        //erweitern
+                                                                        
             songs.push_back(song);
         }
         std::cout << "Bibliothek wurde erfolgreich aus 'library.json' initalisiert.\n";
@@ -80,7 +80,7 @@ void MusicLibrary::editSong()
     displayLibrary();
 
     std::string titleToEdit;
-    std::cout << "Geben Sie den Titel des zu bearbeitenden Songs ein:";
+    std::cout << "Geben Sie den Titel des zu bearbeitenden Songs ein: \n";
     std::cin.ignore();
     std::getline(std::cin, titleToEdit);
 
@@ -91,7 +91,7 @@ void MusicLibrary::editSong()
 
     if (it == songs.end())
     {
-        std::cout << "Der Titel" << titleToEdit << "wurde nicht gefunden. Bearbeitung abgebrochen.";
+        std::cout << "Der Titel " << titleToEdit << " wurde nicht gefunden. \n Bearbeitung abgebrochen.\n";
         return;
     }
 
@@ -160,9 +160,7 @@ void MusicLibrary::editSong()
 
     } while (continueEditing == 'j' || continueEditing == 'J');
     
-    std::cout << "Bearbeitung abgeschlossen.\n";
-
-    
+    std::cout << "Bearbeitung abgeschlossen.\n";   
 }
 
 void MusicLibrary::deleteSong()
